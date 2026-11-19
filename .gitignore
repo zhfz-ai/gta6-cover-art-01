@@ -1,2 +1,3 @@
+# gta6-cover-art-01: ignore generated output and installed deps
 out/
 node_modules/
