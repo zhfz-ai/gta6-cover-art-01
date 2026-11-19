@@ -3,20 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Neon Poster — Cover Art Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<header class="topbar">
+  <div class="brand">
+    <h1>Neon Poster</h1>
+    <p>Turn your photos into bold multi-panel cover art. Works fully offline — photos never leave this page.</p>
+  </div>
+  <p id="status" role="status">Loading…</p>
+</header>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="stage" id="stage">
+    <canvas id="cover" width="1920" height="1080" aria-label="Cover art preview"></canvas>
+    <p class="stage-hint">Click a panel to select it · drag to move the photo · scroll to zoom</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <aside class="controls">
+    <section class="group">
+      <h2>Layout</h2>
+      <div class="chip-row" id="layoutButtons"></div>
+    </section>
+    <section class="group">
+      <h2>Photo for <span id="panelLabel">Panel 1</span></h2>
+      <div class="row">
+        <button id="prevPanel" type="button" class="small">‹ Prev</button>
+        <button id="nextPanel" type="button" class="small">Next ›</button>
+      </div>
+      <label class="file-pick">Add your photo
+        <input id="photoFile" type="file" accept="image/*">
+      </label>
+      <p class="note">…or try a sample photo:</p>
+      <div class="sample-row" id="sampleButtons"></div>
+      <button id="fillAll" type="button" class="wide">Fill every panel with this photo</button>
+      <label class="slider-label">Zoom
+        <input id="zoomRange" type="range" min="100" max="300" value="100">
+      </label>
+    </section>
+    <section class="group">
+      <h2>Caption</h2>
+      <label class="text-label">Title
+        <input id="titleInput" type="text" maxlength="42" value="NEON HARBOR">
+      </label>
+      <label class="text-label">Subtitle
+        <input id="subtitleInput" type="text" maxlength="48" value="A SUNSET STORY">
+      </label>
+      <div class="row">
+        <div class="swatches" id="colorSwatches"></div>
+      </div>
+      <div class="row seg" id="positionSeg">
+        <button id="posBottom" type="button">Bottom</button>
+        <button id="posTop" type="button">Top</button>
+      </div>
+      <div class="row seg" id="fontSeg">
+        <button id="fontAnton" type="button">Anton</button>
+        <button id="fontArchivo" type="button">Archivo Black</button>
+      </div>
+    </section>
+    <section class="group">
+      <h2>Colour grade</h2>
+      <div class="chip-row" id="gradeButtons"></div>
+      <label class="slider-label">Grade strength
+        <input id="intensityRange" type="range" min="0" max="100" value="85">
+      </label>
+    </section>
+    <section class="group">
+      <h2>Post size &amp; export</h2>
+      <div class="chip-row" id="sizeButtons"></div>
+      <button id="exportBtn" type="button" class="export">Export PNG</button>
+    </section>
+  </aside>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
